@@ -1,65 +1,215 @@
 import React from 'react';
-import { AlurakutMenu, AlurakutProfileSidebarMenuDefault } from '../src/lib/AlurakutCommons'
-import { MainGrid } from '../src/components/MainGrid'
-//import { ProfileRelationsBoxWrapper } from '../src/components/ProfileRelations'
-import ProfilePage from '../src/components/ProfilePage'
-//import axios from 'axios'
+import Alert from 'react';
+import nookies from 'nookies';
+import jwt from 'jsonwebtoken';
+import MainGrid from '../src/components/MainGrid'
+import Box from '../src/components/Box'
+import { AlurakutMenu, AlurakutProfileSidebarMenuDefault, OrkutNostalgicIconSet } from '../src/lib/AlurakutCommons';
+import { ProfileRelationsBoxWrapper } from '../src/components/ProfileRelations';
 
-//import { AlurakutMenu, AlurakutProfileSidebarMenuDefault } from '../src/lib/AlurakutCommons'
-//import { Box } from '../src/components/Box';
-//import { MainGrid } from '../src/components/MainGrid'
-//import { ProfileRelationsBoxWrapper } from '../src/components/ProfileRelations'
-//import ProfilePage from '../src/components/ProfilePage'
+function ProfileSidebar(propriedades) {
+  return (
+    <Box as="aside">
+      <img src={`https://github.com/${propriedades.githubUser}.png`} style={{ borderRadius: '8px' }} />
+      <hr />
+      <p>
+        <a className="boxLink" href={`https://github.com/${propriedades.githubUser}`}>
+          @{propriedades.githubUser}
+        </a>
+      </p>
+      <hr />
 
-// function ProfileSidebar(props) {
+      <AlurakutProfileSidebarMenuDefault />
+    </Box>
+  )
+}
 
-//     return (
-//         <Box as="aside">
-//             <img src={`https://github.com/${props.githubUser}.png`} style={{ borderRadius: '8px' }} />
-//             <hr />
+function ProfileRelationsBox(propriedades) {
+  return (
+    <ProfileRelationsBoxWrapper>
+      <h2 className="smallTitle">
+        {propriedades.title} ({propriedades.items.length})
+      </h2>
+      <ul>
+      {propriedades.items.map((itemAtual) => {
+          return (
+              <li key={itemAtual.id}>
+              <a href={itemAtual.html_url} key={itemAtual.id}>
+                <img src={itemAtual.avatar_url} />
+                <span>{itemAtual.login}</span>
+              </a>
+            </li>
+          )
+        })}
+        {/* {seguidores.map((itemAtual) => {
+          return (
+            <li key={itemAtual}>
+              <a href={`https://github.com/${itemAtual}.png`}>
+                <img src={itemAtual.image} />
+                <span>{itemAtual.title}</span>
+              </a>
+            </li>
+          )
+        })} */}
+      </ul>
+     </ProfileRelationsBoxWrapper>
+  )
+}
 
-//             <p>
-//                 <a className="boxLink" href={`https://github.com/${props.githubUser}`}>
-//                     @{props.githubUser}
-//                 </a>
-//             </p>
-//             <hr />
-
-//             <AlurakutProfileSidebarMenuDefault />
-//         </Box>
-//     );
-// }
-
-export default function Profile() {
+  export default function Profile(props) {
+    const usuarioAleatorio = props.githubUser;
+  // const usuarioAleatorio = 'petyaranha';
   
-    return (
-               <>   
-                {/*   <>//<AlurakutMenu />
-                //<MainGrid>
-                    //<div className="profileArea" style={{ gridArea: 'profileArea' }}>
-                    //</div> 
-                    //<div className="welcomeArea" style={{ gridArea: 'welcomeArea' }}>*/}
-                    <div>
-                        <ProfilePage githubUser='https://github.com/petyaranha.png' />
-                    </div>
-                {/* //</MainGrid>*/}
-            </> 
-        )
+  const [comunidades, setComunidades] = React.useState([]);
+  // const comunidades = comunidades[0];
+  // const alteradorDeComunidades/setComunidades = comunidades[1];
+  // const comunidades = ['Alurakut'];
+  const pessoasFavoritas = [
+    'juunegreiros',
+    'omariosouto',
+    'peas',
+    'rafaballerini',
+    'fabs-silva',
+    'petyaranha'
+  ]
+  const [seguidores, setSeguidores] = React.useState([]);
+  // 0 - Pegar o array de dados do github 
+  React.useEffect(function() {
+     // GET
+    fetch('https://api.github.com/users/petyaranha/followers')
+    .then(function (respostaDoServidor) {
+      return respostaDoServidor.json();
+    })
+    .then(function(respostaCompleta) {
+      setSeguidores(respostaCompleta);
+    })
+
+    // API GraphQL
+    fetch('https://graphql.datocms.com/', {
+      method: 'POST',
+      headers: {
+        'Authorization': '99f9af835d00674c3be98afa12abc1',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({ "query": `query {
+        allCommunities {
+          id 
+          title
+          imageUrl
+          creatorSlug
+        }
+      }` })
+    })
+    .then((response) => response.json()) // Pega o retorno do response.json() e já retorna
+    .then((respostaCompleta) => {
+      const comunidadesVindasDoDato = respostaCompleta.data.allCommunities;
+      console.log(comunidadesVindasDoDato)
+      setComunidades(comunidadesVindasDoDato)
+    })
+    // .then(function (response) {
+    //   return response.json()
+    // })
+
+  }, [])
+
+  console.log('seguidores antes do return', seguidores);
+
+  // 1 - Criar um box que vai ter um map, baseado nos items do array
+  // que pegamos do GitHub
+
+  return (
+    <>
+      <AlurakutMenu />
+      <MainGrid>
+        {/* <Box style="grid-area: profileArea;"> */}
+        <div className="profileArea" style={{ gridArea: 'profileArea' }}>
+          <ProfileSidebar githubUser={usuarioAleatorio} />
+        </div>
+        <div className="welcomeArea" style={{ gridArea: 'welcomeArea' }}>
+          <Box>
+            <h1 className="title">
+              {usuarioAleatorio} 
+            </h1>
+
+            <OrkutNostalgicIconSet />
+          </Box>
+          <Box>
+            <h2 className="subTitle">Mais informações</h2>
+            <p>Mais informações sobre {usuarioAleatorio}</p>
+          </Box>
+        </div>
+        <div className="profileRelationsArea" style={{ gridArea: 'profileRelationsArea' }}>
+
+        <ProfileRelationsBox title="Seguidores" items={seguidores} /> 
+
+        <ProfileRelationsBoxWrapper>
+            <h2 className="smallTitle">
+              Comunidades ({comunidades.length})
+            </h2>
+            <ul>
+              {comunidades.map((itemAtual) => {
+                return (
+                  <li key={itemAtual.id}>
+                    <a href={`/communities/${itemAtual.id}`} key={itemAtual.title}>
+                      <img src={itemAtual.imageUrl} />  
+                      <span>{itemAtual.title}</span>
+                    </a>
+                  </li>
+                )
+              })}
+            </ul>
+     
+          </ProfileRelationsBoxWrapper>
+
+          <ProfileRelationsBoxWrapper>
+            <h2 className="smallTitle">
+              Pessoas da comunidade ({pessoasFavoritas.length})
+            </h2>
+            <ul>
+              {pessoasFavoritas.map((itemAtual) => {
+                return (
+                  <li key={itemAtual}>
+                  <a href={`/users/${itemAtual}`}>
+                      <img src={`https://github.com/${itemAtual}.png`} />
+                      <span>{itemAtual}</span>
+                    </a>
+                  </li>
+                )
+              })}
+            </ul>
+          </ProfileRelationsBoxWrapper>
+
+        </div>
+      </MainGrid>
+    </>
+  )
+}
+export async function getServerSideProps(context) {
+  const cookies = nookies.get(context)
+  const token = cookies.USER_TOKEN;
+  const { githubUser } = jwt.decode(token);
+  console.log("olha aqui" + githubUser);
+  //const { isAuthenticated } = await fetch('https://alurakut.vercel.app/api/auth', {
+    const { isAuthenticated } = await fetch('http://localhost:3000/api/auth', {
+    headers: {
+        Authorization: token
+      }
+  })
+  .then((resposta) => resposta.json())
+   console.log("olha aqui" + isAuthenticated);
+  if(!isAuthenticated) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      }
     }
-        //<>
-        //<ProfilePage/>
-            {/* <AlurakutMenu />
-            <MainGrid>
-                <div className="profileArea" style={{ gridArea: 'profileArea' }}>
-                    <ProfileSidebar githubUser={gitUser}/>
-                </div>
-                <div className="welcomeArea" style={{ gridArea: 'welcomeArea' }}>
-                    <ProfilePage githubUser={gitUser}/>
-                   
-                </div>
-            </MainGrid> */}
-        //</>
-//    )
-//}
-       
+  }
   
+  return {
+    props: {
+      githubUser
+    }, // will be passed to the page component as props
+  }
+} 
