@@ -213,7 +213,7 @@ Seja bem vindo ao projeto base do Alurakut !!! Passos fundamentais:
 | [<img width='500px' src='https://opengraph.githubassets.com/cf9f1db04b6e4e2b7a984902d69b889f717d09cb94b8b4296ffffc16d0c73120/renatogama99/alurakut'/>](alurakut-blond.vercel.app)
 | [<img width='500px' src='https://opengraph.githubassets.com/cf9f1db04b6e4e2b7a984902d69b889f717d09cb94b8b4296ffffc16d0c73120/joseeduardorp/alurakut'/>](https://github.com/joseeduardorp/alurakut)
 | [<img width='500px' src='https://opengraph.githubassets.com/cf9f1db04b6e4e2b7a984902d69b889f717d09cb94b8b4296ffffc16d0c73120/EduardoMaizo/alurakut'/>](https://github.com/EduardoMaizo/alurakut)
-| [<img width='500px' src='https://opengraph.githubassets.com/cf9f1db04b6e4e2b7a984902d69b889f717d09cb94b8b4296ffffc16d0c73120/nlnadialigia/alurakut'/>](http://nlnadialigia-alurakut.vercel.app)
+| [<img width='500px' src='https://opengraph.githubassets.com/cf9f1db04b6e4e2b7a984902d69b889f717d09cb94b8b4296ffffc16d0c73120/nlnadialigia/alurakut'/>](https://nlnadialigia-alurakut.vercel.app)
 | [<img width='500px' src='https://opengraph.githubassets.com/cf9f1db04b6e4e2b7a984902d69b889f717d09cb94b8b4296ffffc16d0c73120/tukinhafl/alurakut'/>](alurakut-vert.vercel.app)
 | [<img width='500px' src='https://opengraph.githubassets.com/cf9f1db04b6e4e2b7a984902d69b889f717d09cb94b8b4296ffffc16d0c73120/natasha-developer/alurakut'/>](https://github.com/natasha-developer/alurakut)
 | [<img width='500px' src='https://opengraph.githubassets.com/cf9f1db04b6e4e2b7a984902d69b889f717d09cb94b8b4296ffffc16d0c73120/jeanhjaques/alurakut'/>](alurakut-rosy.vercel.app)
