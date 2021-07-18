@@ -1,5 +1,4 @@
 import React from 'react';
-import Alert from 'react';
 import nookies from 'nookies';
 import jwt from 'jsonwebtoken';
 import MainGrid from '../src/components/MainGrid'
@@ -104,7 +103,7 @@ function ProfileRelationsBox(propriedades) {
     .then((response) => response.json()) // Pega o retorno do response.json() e já retorna
     .then((respostaCompleta) => {
       const comunidadesVindasDoDato = respostaCompleta.data.allCommunities;
-      console.log(comunidadesVindasDoDato)
+      // console.log(comunidadesVindasDoDato)
       setComunidades(comunidadesVindasDoDato)
     })
     // .then(function (response) {
@@ -113,7 +112,7 @@ function ProfileRelationsBox(propriedades) {
 
   }, [])
 
-  console.log('seguidores antes do return', seguidores);
+  // console.log('seguidores antes do return', seguidores);
 
   // 1 - Criar um box que vai ter um map, baseado nos items do array
   // que pegamos do GitHub
@@ -140,8 +139,8 @@ function ProfileRelationsBox(propriedades) {
                 e.preventDefault();
                 const dadosDoForm = new FormData(e.target);
 
-                console.log('Campo: ', dadosDoForm.get('title'));
-                console.log('Campo: ', dadosDoForm.get('image'));
+                // console.log('Campo: ', dadosDoForm.get('title'));
+                // console.log('Campo: ', dadosDoForm.get('image'));
 
                 const comunidade = {
                   title: dadosDoForm.get('title'),
@@ -158,7 +157,7 @@ function ProfileRelationsBox(propriedades) {
                 })
                 .then(async (response) => {
                   const dados = await response.json();
-                  console.log(dados.registroCriado);
+                  // console.log(dados.registroCriado);
                   const comunidade = dados.registroCriado;
                   const comunidadesAtualizadas = [...comunidades, comunidade];
                   setComunidades(comunidadesAtualizadas)
@@ -236,15 +235,15 @@ export async function getServerSideProps(context) {
   const cookies = nookies.get(context)
   const token = cookies.USER_TOKEN;
   const { githubUser } = jwt.decode(token);
-  console.log("olha aqui" + githubUser);
+  // console.log("olha aqui" + githubUser);
   //const { isAuthenticated } = await fetch('https://alurakut.vercel.app/api/auth', {
-    const { isAuthenticated } = await fetch('http://localhost:3000/api/auth', {
+    const { isAuthenticated } = await fetch('http://https://alurakut-bete.vercel.app/api/auth', {
     headers: {
         Authorization: token
       }
   })
   .then((resposta) => resposta.json())
-   console.log("olha aqui" + isAuthenticated);
+   // console.log("olha aqui" + isAuthenticated);
   if(!isAuthenticated) {
     return {
       redirect: {

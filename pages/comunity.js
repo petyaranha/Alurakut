@@ -5,7 +5,7 @@ import MainGrid from '../src/components/MainGrid'
 import Box from '../src/components/Box'
 import { AlurakutMenu, AlurakutProfileSidebarMenuDefault, OrkutNostalgicIconSet } from '../src/lib/AlurakutCommons';
 import { ProfileRelationsBoxWrapper } from '../src/components/ProfileRelations';
-import ProfilePage from '../src/components/ProfilePage'
+// em elaboração import ComunityPage from '../src/components/ComunityPage'
 
 function ProfileSidebar(propriedades) {
   return (
@@ -135,9 +135,9 @@ function ProfileRelationsBox(propriedades) {
             <OrkutNostalgicIconSet />
           </Box>
           <Box>
-            <h2 className="subTitle">Mais informações</h2>
-            {/* <p>Mais informações sobre {usuarioAleatorio}</p> */}
-            <ProfilePage/>
+            <h2 className="subTitle">Comunidades</h2>
+             <p>Página em elaboração por {usuarioAleatorio} , aguarde...</p> 
+            {/* <ComunityPage/> */}
             
           </Box>
         </div>
@@ -191,7 +191,6 @@ export async function getServerSideProps(context) {
   const cookies = nookies.get(context)
   const token = cookies.USER_TOKEN;
   const { githubUser } = jwt.decode(token);
-  // console.log("olha aqui" + githubUser);
   //const { isAuthenticated } = await fetch('https://alurakut.vercel.app/api/auth', {
     const { isAuthenticated } = await fetch('http://https://alurakut-bete.vercel.app/api/auth', {
     headers: {
@@ -199,7 +198,7 @@ export async function getServerSideProps(context) {
       }
   })
   .then((resposta) => resposta.json())
-   // console.log("olha aqui" + isAuthenticated);
+   
   if(!isAuthenticated) {
     return {
       redirect: {

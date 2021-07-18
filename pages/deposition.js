@@ -5,7 +5,7 @@ import MainGrid from '../src/components/MainGrid'
 import Box from '../src/components/Box'
 import { AlurakutMenu, AlurakutProfileSidebarMenuDefault, OrkutNostalgicIconSet } from '../src/lib/AlurakutCommons';
 import { ProfileRelationsBoxWrapper } from '../src/components/ProfileRelations';
-import ProfilePage from '../src/components/ProfilePage'
+import DepositionPage from '../src/components/DepositionPage'
 
 function ProfileSidebar(propriedades) {
   return (
@@ -135,9 +135,9 @@ function ProfileRelationsBox(propriedades) {
             <OrkutNostalgicIconSet />
           </Box>
           <Box>
-            <h2 className="subTitle">Mais informações</h2>
+            <h2 className="subTitle">Depoimentos</h2>
             {/* <p>Mais informações sobre {usuarioAleatorio}</p> */}
-            <ProfilePage/>
+            <DepositionPage/>
             
           </Box>
         </div>
