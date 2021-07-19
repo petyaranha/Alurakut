@@ -56,7 +56,7 @@ function ProfileRelationsBox(propriedades) {
 }
 
   export default function Home(props) {
-    const usuarioAleatorio = props.githubUser;
+    const usuarioAleatorio = props.githubUser || 'petyaranha';
   // const usuarioAleatorio = 'petyaranha';
   
   const [comunidades, setComunidades] = React.useState([]);
