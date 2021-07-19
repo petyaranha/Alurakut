@@ -197,7 +197,7 @@ function ProfileRelationsBox(propriedades) {
               {comunidades.map((itemAtual) => {
                 return (
                   <li key={itemAtual.id}>
-                    <a href={`/communities/${itemAtual.id}`} key={itemAtual.title}>
+                      <a href={`/communities/${itemAtual.id}`} key={itemAtual.title}>
                       <img src={itemAtual.imageUrl} />  
                       <span>{itemAtual.title}</span>
                     </a>
