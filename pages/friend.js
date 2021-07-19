@@ -56,8 +56,8 @@ function ProfileRelationsBox(propriedades) {
   )
 }
 
-  export default function Profile(props) {
-    const usuarioAleatorio = props.githubUser || 'petyaranha';
+  export default function Friend(props) {
+    const usuarioAleatorio = props.githubUser;
   // const usuarioAleatorio = 'petyaranha';
   
   const [comunidades, setComunidades] = React.useState([]);
@@ -190,7 +190,6 @@ function ProfileRelationsBox(propriedades) {
 export async function getServerSideProps(context) {
   const cookies = nookies.get(context)
   const token = cookies.USER_TOKEN;
-  const { githubUser } = jwt.decode(token);
   //const { isAuthenticated } = await fetch('https://alurakut.vercel.app/api/auth', {
     const { isAuthenticated } = await fetch('https://alurakut-bete.vercel.app/api/auth', {
     headers: {
@@ -207,7 +206,7 @@ export async function getServerSideProps(context) {
       }
     }
   }
-  
+  const { githubUser } = jwt.decode(token);
   return {
     props: {
       githubUser
